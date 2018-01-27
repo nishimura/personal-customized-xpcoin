@@ -90,3 +90,12 @@ const std::string CLIENT_NAME("XP");
 
 const std::string CLIENT_BUILD(BUILD_DESC CLIENT_VERSION_SUFFIX CL_NAME);
 const std::string CLIENT_DATE(BUILD_DATE);
+
+
+const std::string CUSTOMIZED_NAME("dev");
+
+// number of merged branches
+#define CUSTOMIZED_VERSION 6
+
+#define CUSTOMIZED_B_COMMENT(v) "b" DO_STRINGIZE(v)
+const std::string CUSTOMIZED_VERCOMMENT(CUSTOMIZED_B_COMMENT(CUSTOMIZED_VERSION));
