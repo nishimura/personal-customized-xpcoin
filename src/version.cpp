@@ -94,8 +94,7 @@ const std::string CLIENT_DATE(BUILD_DATE);
 
 const std::string CUSTOMIZED_NAME("dev");
 
-// number of merged branches
-#define CUSTOMIZED_VERSION 6
+// number of merged <branches.other_changes>
+#define CUSTOMIZED_VERSION "6.1"
 
-#define CUSTOMIZED_B_COMMENT(v) "b" DO_STRINGIZE(v)
-const std::string CUSTOMIZED_VERCOMMENT(CUSTOMIZED_B_COMMENT(CUSTOMIZED_VERSION));
+const std::string CUSTOMIZED_VERCOMMENT("b" CUSTOMIZED_VERSION);

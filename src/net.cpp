@@ -494,7 +494,9 @@ void CNode::PushVersion()
     RAND_bytes((unsigned char*)&nLocalHostNonce, sizeof(nLocalHostNonce));
     printf("send version message: version %d, blocks=%d, us=%s, them=%s, peer=%s\n", PROTOCOL_VERSION, nBestHeight, addrMe.ToString().c_str(), addrYou.ToString().c_str(), addr.ToString().c_str());
 
-    std::vector<string> customizedVersion = {CUSTOMIZED_NAME, CUSTOMIZED_VERCOMMENT};
+    std::vector<string> customizedVersion;
+    customizedVersion.push_back(CUSTOMIZED_NAME);
+    customizedVersion.push_back(CUSTOMIZED_VERCOMMENT);
     PushMessage("version", PROTOCOL_VERSION, nLocalServices, nTime, addrYou, addrMe,
                 nLocalHostNonce, FormatSubVersion(CLIENT_NAME, CLIENT_VERSION, customizedVersion), nBestHeight);
 }
