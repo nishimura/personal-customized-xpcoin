@@ -759,7 +759,7 @@ void ThreadStakeMiner(void* parg)
 
                 CheckStake(pblock, *pwallet);
                 SetThreadPriority(THREAD_PRIORITY_LOWEST);
-                Sleep(500);
+                Sleep(GetArg("-minerwait", 500));
             }
 
             if (pindexPrev != pindexBest)
@@ -777,7 +777,7 @@ void ThreadStakeMiner(void* parg)
                 }
             }
 
-            Sleep(500);
+            Sleep(GetArg("-minerwait", 500));
 
             _endloop:
                 (void)0; // do nothing
