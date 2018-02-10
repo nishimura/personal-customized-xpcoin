@@ -1863,7 +1863,10 @@ bool CWallet::CreateCoinStake(uint256 &hashTx, uint32_t nOut, uint32_t nGenerati
 
     // The following combine threshold is important to security
     // Should not be adjusted if you don't understand the consequences
-    int64_t nCombineThreshold = GetProofOfWorkReward(GetLastBlockIndex(pindexBest, false)->nBits, 0, pindexBest->nHeight) / 3;
+
+    int64_t nCombineThreshold = GetArg("-combinethreshold", 0) * COIN;
+    if (nCombineThreshold <= 0)
+        nCombineThreshold = GetProofOfWorkReward(GetLastBlockIndex(pindexBest, false)->nBits, 0, pindexBest->nHeight) / 3;
 
     int64_t nBalance = GetBalance();
     int64_t nCredit = wtx.vout[nOut].nValue;
@@ -1877,7 +1880,8 @@ bool CWallet::CreateCoinStake(uint256 &hashTx, uint32_t nOut, uint32_t nGenerati
 
     // Set generation time, and kernel input
     txNew.nTime = nGenerationTime;
-    txNew.vin.push_back(CTxIn(hashTx, nOut));
+    CTxIn foundTxIn = CTxIn(hashTx, nOut);
+    txNew.vin.push_back(foundTxIn);
 
     // Mark coin stake transaction with empty vout[0]
     CScript scriptEmpty;
@@ -1933,7 +1937,10 @@ bool CWallet::CreateCoinStake(uint256 &hashTx, uint32_t nOut, uint32_t nGenerati
             if (pcoin->first->vout[pcoin->second].nValue > nCombineThreshold)
                 continue;
 
-            txNew.vin.push_back(CTxIn(pcoin->first->GetHash(), pcoin->second));
+            CTxIn otherTxIn = CTxIn(pcoin->first->GetHash(), pcoin->second);
+            if (foundTxIn == otherTxIn)
+              continue;
+            txNew.vin.push_back(otherTxIn);
             nCredit += pcoin->first->vout[pcoin->second].nValue;
             vwtxPrev.push_back(pcoin->first);
         }
