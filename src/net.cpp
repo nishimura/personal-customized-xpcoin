@@ -19,7 +19,7 @@
 using namespace std;
 using namespace boost;
 
-static const int MAX_OUTBOUND_CONNECTIONS = 16;
+static const int MAX_OUTBOUND_CONNECTIONS = 9;
 
 void ThreadMessageHandler2(void* parg);
 void ThreadSocketHandler2(void* parg);
@@ -943,10 +943,10 @@ void ThreadSocketHandler2(void* parg)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strDNSSeed[][2] = {
-    {"dnsseed.xpcoin.io", "dnsseed.xpcoin.io"},
-	{"dnsseed2.xpcoin.io", "dnsseed2.xpcoin.io"},
-	{"dnsseed3.xpcoin.io", "dnsseed3.xpcoin.io"},
-	{"dnsseed4.xpcoin.io", "dnsseed4.xpcoin.io"}
+    {"seed1.xpcoin.io", "seed1.xpcoin.io"},
+	{"seed2.xpcoin.io", "seed2.xpcoin.io"},
+	{"seed3.xpcoin.io", "seed3.xpcoin.io"},
+	{"seed4.xpcoin.io", "seed4.xpcoin.io"}
 };
 
 void ThreadDNSAddressSeed(void* parg)
