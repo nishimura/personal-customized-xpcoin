@@ -56,14 +56,13 @@ const std::string CLIENT_NAME("XP");
 #endif
 
 // git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
-#define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
 #    define GIT_COMMIT_ID ""
 #    define GIT_COMMIT_DATE ""
 #endif
 
 #define BUILD_DESC_FROM_COMMIT(maj,min,rev,build,commit) \
-    "XP-v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "" commit
+    "XP-v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-" commit
 
 #define BUILD_DESC_FROM_UNKNOWN(maj,min,rev,build) \
     "XP-v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-unk"
@@ -88,13 +87,13 @@ const std::string CLIENT_NAME("XP");
 #    endif
 #endif
 
-const std::string CLIENT_BUILD(BUILD_DESC CLIENT_VERSION_SUFFIX CL_NAME);
+#define CUSTOMIZED_NAME "dev"
+
+#ifndef CUSTOMIZED_VERSION
+#define CUSTOMIZED_VERSION "7.0"
+#endif
+
+const std::string CLIENT_BUILD(BUILD_DESC CLIENT_VERSION_SUFFIX CL_NAME "_" CUSTOMIZED_NAME ".b" CUSTOMIZED_VERSION);
 const std::string CLIENT_DATE(BUILD_DATE);
 
 
-const std::string CUSTOMIZED_NAME("dev");
-
-// number of merged <branches.other_changes>
-#define CUSTOMIZED_VERSION "7.0"
-
-const std::string CUSTOMIZED_VERCOMMENT("b" CUSTOMIZED_VERSION);

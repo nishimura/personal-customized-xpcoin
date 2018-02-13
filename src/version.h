@@ -56,7 +56,4 @@ static const int MEMPOOL_GD_VERSION = 60002;
 #define DISPLAY_VERSION_MINOR       1
 #define DISPLAY_VERSION_REVISION    0
 
-extern const std::string CUSTOMIZED_NAME;
-extern const std::string CUSTOMIZED_VERCOMMENT;
-
 #endif
